@@ -14,7 +14,5 @@ class CreateContributorsPackages < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    # add_index :contributors_packages, :contributor_id
-    # add_index :contributors_packages, :package_id
   end
 end

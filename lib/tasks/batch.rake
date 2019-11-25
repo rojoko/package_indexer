@@ -14,12 +14,11 @@ namespace :batch do
     puts "Packages: #{packages.size}"
     package_details_map = {}
     packages.each_with_index do |p, i|
-      puts "package##{i}: #{p}"
+      puts "package##{i+1}: #{p}"
       description = PackageDescriptionFetcher.new.fetch(p)
-      puts "description##{i}: #{description}"
-      package_details_map[p] = description
+      puts "description##{i+1}: #{description}"
+      PackageDetailsPersister.new.persist description
     end
-    puts package_details_map
   end
 
 end
