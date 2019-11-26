@@ -11,7 +11,13 @@ class PackageDescriptionFetcher
 	end
 
 	def fetch(package_name_version)
-		raw = RestClient::Request.execute(method: :get, url: base_uri + package_name_version + package_suffix, raw_response: true)
+		begin
+			raw = RestClient::Request.execute(method: :get, url: base_uri + package_name_version + package_suffix, raw_response: true)
+		rescue RestClient::Exceptions::OpenTimeout, RestClient::Exceptions::ReadTimeout, Net::OpenTimeout, Errno::ETIMEDOUT => e
+			puts "Timeout (#{e}), retrying in 1 second..."
+			sleep(1)
+			retry
+		end
 		if raw.file.size > 0
 			self.description = extract_description(raw.file)
 		end
