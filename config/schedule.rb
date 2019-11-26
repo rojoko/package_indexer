@@ -19,10 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :day, at: '12:00 am' do
+every 1.day, at: '12:00 am' do
   runner "batch:package_indexer_daily_job"
-end
-
-every :hour do
-  runner "batch:package_indexer_hourly_job"
 end
