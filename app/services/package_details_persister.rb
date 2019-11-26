@@ -61,13 +61,12 @@ class PackageDetailsPersister
     contributor = Contributor.new if contributor.nil?
     contributor.name = contributor_map[:name]
     contributor.email = contributor_map[:email]
-    if contributor.nil?
+    if contributor.save
       contributor
     else
       puts "Contributor not saved: #{contributor}"
       nil
     end
-    contributor if contributor.save
   end
 
   def parse_contributor_details(contributor)
